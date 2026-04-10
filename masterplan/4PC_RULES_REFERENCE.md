@@ -623,6 +623,48 @@ When a player resigns or times out (NOT checkmate/stalemate):
 
 A PromotedQueen is worth 900cp in eval (it moves like a queen) but only 1 point in FFA scoring (it was a pawn). Do not confuse these systems.
 
+### 9.4 Scoring Pipeline — Where Each System Lives
+
+```
+Engine Search (OPPS)
+  └── Evaluator returns: centipawns (i16, scalar, 1-perspective)
+        └── Bootstrap eval: material + PST + king safety + pawn structure → cp
+        └── NNUE: learned weights → cp (same scale, drop-in replacement)
+
+Game State
+  └── FFA points: integer, accumulated from captures + events
+  └── Tracked per player independently
+
+Observer / Training Data Output
+  └── Per-position record contains BOTH:
+        ├── search_score: centipawns (what the search thinks the position is worth)
+        └── game_outcome: FFA points at game end (how the game actually turned out)
+
+NNUE Training Target
+  └── target = λ × search_score(cp) + (1-λ) × normalized_outcome
+  └── game_outcome must be NORMALIZED to centipawn scale before blending
+  └── Normalization: map FFA point range to centipawn range
+  └── DO NOT blend raw FFA points with raw centipawns — different scales
+```
+
+**The normalization step is critical.** Raw FFA points (0-60 range) cannot be blended with raw centipawns (-3000 to +3000 range) without scaling. The training pipeline must define and document the normalization function.
+
+### 9.5 FEN4 Representation
+
+Board positions are serialized as FEN4 strings for training data, protocol communication, and debugging. Format:
+
+```
+<rank14>/<rank13>/.../<rank1> <side_to_move> <castling_rights> <ep_square> <halfmove>
+```
+
+- Pieces: `rP` (red pawn), `bK` (blue king), `yQ` (yellow queen), `gN` (green knight)
+- Empty squares: digit count (like standard FEN)
+- Invalid corners: `xxx` (3 invalid squares)
+- Side to move: `r`, `b`, `y`, or `g`
+- Castling: subset of `RrBbYyGg` (uppercase = kingside, lowercase = queenside)
+
+FEN4 must round-trip perfectly: parse → internal state → serialize → same FEN4 string.
+
 ---
 
 ## 10. GAME END CONDITIONS (FFA)
@@ -634,9 +676,9 @@ A PromotedQueen is worth 900cp in eval (it moves like a queen) but only 1 point 
 
 ---
 
-## 10b. GAME END CONDITIONS (LKS — Freyja-Original Mode)
+## 10b. GAME END CONDITIONS (LKS)
 
-Last King Standing is a Freyja-original game mode. Chess.com does not implement LKS.
+Last King Standing. Chess.com does not implement LKS — this is an original game mode.
 
 ### 10b.1 Win Condition
 
@@ -662,11 +704,11 @@ Same as FFA (Section 7.4): checkmate, stalemate, resignation, timeout. Eliminate
 
 ### 10b.5 NNUE Training Target
 
-LKS NNUE trains on `eval_4vec` (bootstrap eval centipawns — positional/survival). This is appropriate because survival correlates with positional strength. FFA points (`ffa_4vec`) are irrelevant to LKS.
+LKS NNUE trains on the bootstrap eval score (centipawns — positional/survival). This is appropriate because survival correlates with positional strength. FFA points are irrelevant to LKS.
 
 ---
 
-## 11. TERRAIN MODE (Freyja-Specific Game Variant)
+## 11. TERRAIN MODE (Game Variant)
 
 When a player is eliminated (by any means), their remaining pieces stay on the board permanently as immovable terrain:
 - Cannot be captured or moved by any player
