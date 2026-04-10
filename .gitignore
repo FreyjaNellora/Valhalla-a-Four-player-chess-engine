@@ -1,0 +1,41 @@
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+
+# Node / UI
+node_modules/
+dist/
+.cache/
+
+# NNUE weights
+*.fnnue
+*.nnue
+*.bin
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Obsidian
+masterplan/.obsidian/
+
+# Environment
+.env
+.env.local
+
+# Observer reports (generated)
+observer/reports/
+
+# Local files (NEVER commit — contain secrets or machine-specific info)
+masterplan/SYSTEM_PROFILE.local.md
+masterplan/NOTIFICATIONS.local.md
+.claude/settings.local.json
+.claude/dispatch_comms.jsonl

@@ -1,0 +1,19 @@
+[package]
+name = "valhalla-engine"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "valhalla-engine"
+path = "src/main.rs"
+
+[lib]
+name = "valhalla_engine"
+path = "src/lib.rs"
+
+[dependencies]
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+rand = "0.8"
+
+[dev-dependencies]
