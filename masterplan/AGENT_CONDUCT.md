@@ -161,6 +161,18 @@ When you discover that your phase needs a change in another phase's territory:
 
 **Recommend, don't just report.** Opinionated entries are more useful than neutral ones. "I recommend X because Y" beats "Options are X, Y, or Z."
 
+**ntfy Notifications (MANDATORY).** Agents MUST send an ntfy notification for ALL of the following events. Read `masterplan/NOTIFICATIONS.local.md` for the topic name and curl format.
+
+| Event | Title Format | Priority |
+|-------|-------------|----------|
+| Phase complete | `[COMPLETE] Phase N: Brief summary` | 4 (high) |
+| Tier 2 approval needed | `[TIER 2] Phase N: What needs approval` | 5 (urgent) |
+| Session ending | `[SESSION END] Phase N: What was done` | 3 (normal) |
+| Blocked / broken | `[BLOCKED] Phase N: What broke` | 4 (high) |
+| Milestone reached | `[MILESTONE] Phase N: What was achieved` | 3 (normal) |
+
+The user may be away from their desk. ntfy is how they stay informed. Do not skip notifications — if in doubt, send one.
+
 **HARD STOP on Tier 2 requests.** When a Tier 2 approval is needed:
 1. **ALL work stops.** Not "continue other tasks while waiting." FULL STOP.
 2. **ALL background processes stop.** Kill training runs, self-play, builds — everything.
