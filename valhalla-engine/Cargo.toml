@@ -15,5 +15,6 @@ path = "src/lib.rs"
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 rand = "0.8"
+arrayvec = "0.7"
 
 [dev-dependencies]
