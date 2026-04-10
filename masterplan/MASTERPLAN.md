@@ -449,7 +449,7 @@ For positions needing other perspectives (MCTS backpropagation), rotate board 90
 **Training pipeline (Python + PyTorch):**
 
 1. **Data generation.** Engine plays self-play games via observer. Games recorded as (position, search_score, game_outcome) tuples.
-2. **Labeling.** Combined target: `target = λ × search_score + (1 - λ) × game_outcome`. Start with λ = 0.7.
+2. **Labeling.** Combined target: `target = λ × search_score + (1 - λ) × normalized_outcome`. Start with λ = 0.7. **Critical:** `game_outcome` (FFA points, 0-60 range) must be normalized to centipawn scale (-3000 to +3000) before blending with `search_score` (centipawns). See `4PC_RULES_REFERENCE.md` Section 9.4 for the full scoring pipeline. Raw FFA points blended with raw centipawns = corrupted training data.
 3. **Training.** Generational loop:
    - Gen 1: Train from scratch on self-play data (LR=0.001)
    - Gen 2+: Warm-start from previous gen's checkpoint (LR=0.0001)
