@@ -1,11 +1,11 @@
 # Project Valhalla -- Agent Orientation
 
 > **Model-Tier Router**
-> **Frontier models (Sonnet 4+, Opus 4+, or equivalent capability):**
+> **Mythos-tier models (when released by Anthropic):**
 > Read `CLAUDE_MYTHOS.md` and `masterplan/AGENT_CONDUCT_MYTHOS.md` instead of this file and `AGENT_CONDUCT.md`.
 > The Mythos variants contain identical constraints with reduced procedural scaffolding — optimized for models that don't need compensating guardrails.
 >
-> **All other models:** Continue reading this file.
+> **All current models (including Opus 4.6, Sonnet 4.6, Haiku 4.5):** Continue reading this file.
 
 A four-player chess engine: OPPS + Swarm + MCTS + NNUE.
 Clean rebuild incorporating lessons from Odin v1 (Stages 0-19) and Freyja (Stages 0-17).
