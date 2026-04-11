@@ -79,7 +79,7 @@ For **fast lookup**, use the knowledge vault at `masterplan/`:
 6. **Spot-check outputs.** Don't trust "N records generated" — read actual data. Don't trust "X tests passed" — verify coverage. (AGENT_CONDUCT 1.17)
 7. **Fixed-size data structures in hot paths.** No `Vec<T>` in Board, GameState, or MoveUndo.
 8. **Turn order R->B->Y->G.** Never alter outside make/unmake.
-9. **Searcher trait FROZEN.** `search(&mut self, &GameState, SearchBudget) -> SearchResult`
+9. **Searcher trait FROZEN.** `search(&mut self, &GameState, depth: u32) -> SearchResult`
 10. **Evaluator trait FROZEN.** `eval_scalar` and `eval_4vec`.
 11. **Stages aren't done until the user says so** from testing in the UI.
 12. **Diagnostic games after every eval/search change.**

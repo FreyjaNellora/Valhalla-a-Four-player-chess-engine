@@ -26,18 +26,21 @@ Define the frozen trait interfaces that every future phase builds on. Build a re
 
 | Field | Value |
 |-------|-------|
-| **Status** | not-started |
-| **Last Session** | -- |
-| **Blocking Issues** | Phase 1 not complete |
+| **Status** | implementation complete — pending user testing |
+| **Last Session** | 2026-04-11 |
+| **Blocking Issues** | None. Observer deferred to Phase 3. |
 
 ## Acceptance Checklist
 
-- [ ] Evaluator and Searcher traits defined and frozen
-- [ ] Bootstrap evaluator: < 1us per call, deterministic, no tactical terms
-- [ ] PST verified correct for all four orientations
-- [ ] Influence maps: < 1us computation, blocker attenuation correct
-- [ ] Observer captures structured game JSON with all required fields
-- [ ] A/B runner executes configurable duels with result analysis
+- [x] Evaluator and Searcher traits defined and frozen
+- [x] Bootstrap evaluator: < 1us per call, deterministic, no tactical terms
+- [x] Bootstrap evaluator exposes `evaluate_breakdown()` with labeled component scores
+- [x] PST verified correct for all four orientations
+- [x] Influence maps: < 1us computation, compounding blocker attenuation correct
+- [x] Influence maps skip invalid corner squares (no compute-then-zero)
+- [x] CLAUDE.md rule 9 updated to `depth: u32`
+- [ ] Observer captures structured game JSON with all required fields — **deferred to Phase 3**
+- [ ] A/B runner executes configurable duels with result analysis — **deferred to Phase 3**
 
 ## Active Watch Items
 
@@ -49,14 +52,15 @@ Define the frozen trait interfaces that every future phase builds on. Build a re
 
 | Date | What Changed | Why | Impact |
 |------|-------------|-----|--------|
-| | | | |
+| 2026-04-11 | Observer deferred to Phase 3 | Nothing to observe yet — engine can't play moves until Phase 3 | Phase 3 scope expanded |
+| 2026-04-11 | B=450cp confirmed | User specified B = R - 50cp | constants.rs already had this from prior session |
 
 ## Downstream Notes
 
 Phase 3 needs:
 - `Evaluator` trait: `fn evaluate(&self, state: &GameState) -> Score`
 - `Searcher` trait: `fn search(&mut self, state: &GameState, depth: u32) -> SearchResult`
-- Bootstrap evaluator implementing `Evaluator` (material + PST + king safety + pawn structure)
-- `influence_grid[square][player]` data structure, recomputable per position
-- Observer protocol: game JSON format, A/B runner API
-- Protocol LogFile for diagnostic sessions
+- `BootstrapEvaluator` implementing `Evaluator` + `evaluate_breakdown() -> EvalBreakdown`
+- `InfluenceMap::compute(&GameState)` — `grid[sq][player]` with compounding blocker gradient
+- `ProtocolLog` for diagnostic logging
+- Observer protocol (deferred from Phase 2): game JSON, A/B runner, WebSocket server
