@@ -34,8 +34,17 @@ Pre-fetched summaries of academic papers relevant to Valhalla's architecture. **
 | `expert-iteration-anthony-2017.md` | Search as expert, network as apprentice |
 | `cicero-meta-diplomacy-2022.md` | Opponent intent modeling in 7-player game |
 
+## Opponent Modeling & Uncertainty
+| File | Topic |
+|------|-------|
+| `fog-of-intention-opponent-inference.md` | Bayesian opponent intent — poker, Diplomacy, RTS, Go analogues (novel for board games) |
+
 ## Novel Contributions (No Prior Art)
 These topics have NO direct academic precedent. The files document what adjacent work exists:
 - Swarm-style leaf evaluation pipeline
-- Commitment risk / irreversibility in game tree search
+- Commitment risk / irreversibility in game tree search (AKA "opportunity cost of attention")
 - Multi-player Static Exchange Evaluation (chain walk)
+- Fog of intention / Bayesian opponent inference for multiplayer board games
+
+## Research TODOs
+Phase-tagged research tasks that need investigation: see `../to-be-researched/README.md`
