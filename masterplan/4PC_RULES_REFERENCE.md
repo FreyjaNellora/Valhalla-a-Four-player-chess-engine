@@ -302,7 +302,7 @@ When a player is eliminated, their turn is skipped. The rotation continues with 
 |-------|-----------|----------|-------------------|-------|
 | Pawn | 0 | 100 | 1 | Direction depends on player |
 | Knight | 1 | 300 | 3 | Standard L-shape, corner-aware |
-| Bishop | 2 | 350 | 5 | Diagonal slider, corner-aware |
+| Bishop | 2 | 450 | 5 | Diagonal slider, corner-aware |
 | Rook | 3 | 500 | 5 | Orthogonal slider |
 | Queen | 4 | 900 | 9 | All 8 directions |
 | King | 5 | N/A | 0 (DKW) | 1 step any direction |
@@ -793,7 +793,7 @@ These constants must be defined in the engine and used everywhere. No magic numb
 | `CLAIM_WIN_THRESHOLD` | 21 | Point lead needed to claim win |
 | `PAWN_EVAL` | 100 | Centipawn value |
 | `KNIGHT_EVAL` | 300 | Centipawn value |
-| `BISHOP_EVAL` | 350 | Centipawn value |
+| `BISHOP_EVAL` | 450 | Centipawn value |
 | `ROOK_EVAL` | 500 | Centipawn value |
 | `QUEEN_EVAL` | 900 | Centipawn value |
 | `MAX_GAME_LENGTH` | 1024 | Maximum half-moves before forced draw |

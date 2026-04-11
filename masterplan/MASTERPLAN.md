@@ -214,7 +214,7 @@ Zobrist hashing is four-player aware: piece-square keys for all four colors, sid
 
 **Bootstrap evaluator** implements `Evaluator` with four components:
 
-1. **Material balance.** Piece values (P=100, N=320, B=330, R=500, Q=900, K=∞). Your material minus average of opponents' material.
+1. **Material balance.** Piece values (P=100, N=300, B=450, R=500, Q=900, K=∞). Your material minus average of opponents' material.
 2. **Piece placement.** Piece-square tables for all four orientations. Precomputed by rotating base tables.
 3. **King safety (structural).** Pawn shield integrity, open files near king, castling status. No tactical threats — swarm's domain.
 4. **Pawn structure.** Doubled, isolated, passed pawns, pawn chains. Four directions.

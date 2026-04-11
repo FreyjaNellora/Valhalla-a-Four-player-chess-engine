@@ -54,7 +54,7 @@ pub const PAWN_EVAL: i16 = 100;
 pub const KNIGHT_EVAL: i16 = 300;
 
 /// Bishop value in centipawns.
-pub const BISHOP_EVAL: i16 = 350;
+pub const BISHOP_EVAL: i16 = 450;
 
 /// Rook value in centipawns.
 pub const ROOK_EVAL: i16 = 500;
