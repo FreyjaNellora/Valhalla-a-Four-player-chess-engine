@@ -1,0 +1,9 @@
+DISPATCH TEST: Can you read this? If yes, write "DISPATCH ONLINE" on the next line.
+DISPATCH ONLINE
+
+---
+POLLING PROTOCOL ACTIVE
+After any ntfy send, Dispatch polls ntfy.sh/Valhalla-Dispatch-Nell_From_Hell every 2 minutes for replies.
+If reply received: act immediately, write response to this file + dispatch_comms.jsonl.
+If no reply after 30 min: send one follow-up ntfy, continue polling.
+Conversation happens HERE (test_comms.txt for quick back-and-forth) and ntfy (for alerts/approvals).
