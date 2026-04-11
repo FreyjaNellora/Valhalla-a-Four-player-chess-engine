@@ -206,6 +206,8 @@ pub struct MoveUndo {
     pub half_move_clock: u16,
     /// Zobrist hash before the move (for direct restore on unmake).
     pub zobrist_hash: u64,
+    /// FFA scores before the move (captures modify these).
+    pub ffa_scores: [i16; 4],
 }
 
 /// Trait for collecting generated moves. Implemented for ArrayVec.
@@ -246,8 +248,10 @@ mod tests {
     #[test]
     fn test_move_undo_no_heap() {
         // MoveUndo should be small and stack-allocated
+        // Contains: captured_piece, castling_rights, en_passant, ep_pushing_player,
+        // half_move_clock, zobrist_hash, ffa_scores[4]
         assert!(
-            std::mem::size_of::<MoveUndo>() <= 32,
+            std::mem::size_of::<MoveUndo>() <= 40,
             "MoveUndo is {} bytes",
             std::mem::size_of::<MoveUndo>()
         );

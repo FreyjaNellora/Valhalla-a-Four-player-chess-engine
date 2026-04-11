@@ -3,6 +3,11 @@
 //! The `Searcher` trait is the frozen interface contract for all searchers.
 //! OPPS implements it first; the phase-separated hybrid wraps it later.
 
+pub mod history;
+pub mod killer;
+pub mod move_order;
+pub mod opps;
+
 use crate::game_state::GameState;
 use crate::types::{Move, Score};
 

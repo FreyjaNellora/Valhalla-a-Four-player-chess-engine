@@ -25,6 +25,7 @@ impl GameState {
             ep_pushing_player: self.ep_pushing_player,
             half_move_clock: self.half_move_clock,
             zobrist_hash: self.zobrist_hash,
+            ffa_scores: self.ffa_scores,
         };
 
         // Clear old EP from hash
@@ -116,6 +117,7 @@ impl GameState {
         self.ep_pushing_player = undo.ep_pushing_player;
         self.half_move_clock = undo.half_move_clock;
         self.zobrist_hash = undo.zobrist_hash;
+        self.ffa_scores = undo.ffa_scores;
     }
 
     // --- Internal helpers ---
